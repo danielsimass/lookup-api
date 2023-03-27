@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  api:
+    container_name: lookup-api
+    build: .
+    env_file: .env
+    command: npm run start:dev
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
+    ports:
+      - "8080:8080/tcp"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  database:
+    container_name: lookup-database
+    hostname: lookup-database
+    image: postgres:12
+    expose:
+      - 5432
+    environment:
+      POSTGRES_DB: lookup
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+networks:
+  NETWORK:
+    external: true
+
+volumes:
+  redis-data:

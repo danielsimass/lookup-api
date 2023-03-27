@@ -1,0 +1,17 @@
+{
+    "type": "postgres",
+    "host": "lookup-database",
+    "port": 5432,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "lookup",
+    "entities": [
+      "/../**/*.entity{.ts,.js}"
+    ],
+    "migrations": [
+      "dist/database/migrations/**"
+    ],
+    "cli": {
+      "migrationsDir": "src/migrations"
+    }
+  }
